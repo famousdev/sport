@@ -2,7 +2,8 @@
 
 function getAllPlayers ($db) {
     $sql = "SELECT * FROM players
-        LEFT JOIN teams ON players.team_id = teams.team_id;";
+        LEFT JOIN teams ON players.team_id = teams.team_id 
+        LEFT JOIN countries ON players.country_id = countries.country_id;";
         
     $result = array();
     $stmt = $db->prepare($sql);
