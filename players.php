@@ -47,14 +47,15 @@
       ?> 
       <table class="table table-bordered">
         <tr>
-          <th>Страна</th>
           <th>Игрок</th>
           <th>Команда</th>
+          <th>Страна</th>
         </tr>
           <?php 
           foreach ($players as $player) {?>
           <tr>
           <td><?php echo $player['player_name'];?></td>
+          <td><?php echo $player['team_name'];?></td>
           </tr>
           <?php } ?>
       </table>
