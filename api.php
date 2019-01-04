@@ -48,3 +48,14 @@ function savePlayer($db, $name, $id) {
     $stmt->bindValue('player_id', $id, PDO::PARAM_INT);
     $stmt->execute();
 }
+function getAllCountries ($db) {
+    $sql = "SELECT * FROM countries";     
+    $result = array();
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+
+    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $result[$row['country_id']] = $row;   
+    }
+    return $result;
+}

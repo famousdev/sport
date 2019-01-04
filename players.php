@@ -13,6 +13,7 @@
 
 </head>
 <body>
+<header>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Sport Transfer</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +39,7 @@
    
   </div>
 </nav>
-<header>
+</header>
 <div class="container-fluid">
     <?php include 'db.php';?>
     <?php include 'api.php'; ?>
@@ -60,8 +61,31 @@
           </tr>
           <?php } ?>
       </table>
+      <form action="" method="POST" role="form">
+    <legend for="">Добавить</legend>
+    <div class="form-group">
+      <label for="">Введите имя </label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="введите имя">
+    </div>
+    <div class="form-group">
+      <select name="country" id="country">
+            <?php 
+              $countries = getAllCountries($db);
+              foreach($countries as $key => $value) {
+                echo "<option value=".$value['country_id'].">".$value['country_name']."</option>";
+              }
+            ?>
+      </select>      
+    </div>
+    
+    <button type="submit" class="btn btn-default">Добавить</button>
+    
+</form>
 </div>
-</header>
+
+<footer>
+</footer>
+
 
 </body>
 </html>
