@@ -43,23 +43,23 @@
     <?php include 'db.php';?>
     <?php include 'api.php'; ?>
     <?php
-    $players = getAllPlayers($db);
+    $id = $_GET['player_id'];
+    if($id) {
+        $player = getPlayerById($db, $id);
+    } else {
+        echo "<h2> ERROR </h2>";
+        exit();
+    }
+    $player = getPlayerById($db, $id);
       ?> 
-      <table class="table table-bordered">
-        <tr>
-          <th>Игрок</th>
-          <th>Команда</th>
-          <th>Страна</th>
-        </tr>
-          <?php 
-          foreach ($players as $player) {?>
-          <tr>
-          <td><a href="/sport/edit.php?player_id=<?php echo $player['player_id']; ?>"><?php echo $player['player_name'];?></a></td>
-          <td><?php echo $player['team_name'];?></td>
-          <td><?php echo $player['country_name'];?></td>
-          </tr>
-          <?php } ?>
-      </table>
+      <form action="/sport/save.php" method="post">
+      <input type="hidden" name="id" value="<?php echo $player['player_id']; ?>">
+      <div class="form-group">
+      <label for="name">Игрок</label>
+    <input type="text" class="form-control" id="name" name="name" value="<?php echo $player['player_name']; ?>">
+      </div>
+      <button type="submit" class="btn btn-default">Сохранить</button>
+      </form>
 </div>
 </header>
 

@@ -28,3 +28,23 @@ function getAllTeams ($db) {
     }
     return $result;
 }
+
+function getPlayerById($db, $id) {
+    $sql = "SELECT * FROM players
+            WHERE player_id = :player_id";
+
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue('player_id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $row;
+}
+function savePlayer($db, $name, $id) {
+    $sql = "UPDATE players SET player_name = :player_name
+            WHERE player_id = :player_id";
+
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue('player_name', $name, PDO::PARAM_STR);
+    $stmt->bindValue('player_id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+}

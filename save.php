@@ -43,23 +43,18 @@
     <?php include 'db.php';?>
     <?php include 'api.php'; ?>
     <?php
-    $players = getAllPlayers($db);
+        if(!empty($_POST['name']) && !empty($_POST['id'])){
+            $name = $_POST['name'];
+            $id = $_POST['id'];
+            savePlayer($db, $name, $id);
+            echo $name = $_POST['name']."<h3>Успешно отредактирован</h3>";
+        } else {
+            echo "<h2>Ошибка сохранения</h2>";
+        }
+            
+
       ?> 
-      <table class="table table-bordered">
-        <tr>
-          <th>Игрок</th>
-          <th>Команда</th>
-          <th>Страна</th>
-        </tr>
-          <?php 
-          foreach ($players as $player) {?>
-          <tr>
-          <td><a href="/sport/edit.php?player_id=<?php echo $player['player_id']; ?>"><?php echo $player['player_name'];?></a></td>
-          <td><?php echo $player['team_name'];?></td>
-          <td><?php echo $player['country_name'];?></td>
-          </tr>
-          <?php } ?>
-      </table>
+      
 </div>
 </header>
 
