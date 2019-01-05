@@ -44,8 +44,8 @@ function savePlayer($db, $name, $id) {
             WHERE player_id = :player_id";
 
     $stmt = $db->prepare($sql);
-    $stmt->bindValue('player_name', $name, PDO::PARAM_STR);
-    $stmt->bindValue('player_id', $id, PDO::PARAM_INT);
+    $stmt->bindValue(':player_name', $name, PDO::PARAM_STR);
+    $stmt->bindValue(':player_id', $id, PDO::PARAM_INT);
     $stmt->execute();
 }
 function getAllCountries ($db) {
@@ -58,4 +58,12 @@ function getAllCountries ($db) {
         $result[$row['country_id']] = $row;   
     }
     return $result;
+}
+function addPlayer($db, $playerName, $countryId) {
+    $sql = "INSERT INTO players(player_name, country_id)
+            VALUES(:player_name, :country_id)";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':player_name', $playerName, PDO::PARAM_STR);
+        $stmt->bindValue(':country_id', $countryId, PDO::PARAM_INT);
+        $stmt->execute();
 }

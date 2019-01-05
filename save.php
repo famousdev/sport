@@ -47,7 +47,7 @@
             $name = $_POST['name'];
             $id = $_POST['id'];
             savePlayer($db, $name, $id);
-            echo $name = $_POST['name']."<h3>Успешно отредактирован</h3>";
+            echo "<h3>Игрок успешно отредактирован</h3>";
         } else {
             echo "<h2>Ошибка сохранения</h2>";
         }

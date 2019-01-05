@@ -62,13 +62,13 @@
           <?php } ?>
       </table>
       <form action="" method="POST" role="form">
-    <legend for="">Добавить</legend>
+    <legend for="">Добавить игрока</legend>
     <div class="form-group">
       <label for="">Введите имя </label>
       <input type="text" class="form-control" id="name" name="name" placeholder="введите имя">
     </div>
     <div class="form-group">
-      <select name="country" id="country">
+      <select name="country" id="country" class="form-control">
             <?php 
               $countries = getAllCountries($db);
               foreach($countries as $key => $value) {
@@ -76,12 +76,24 @@
               }
             ?>
       </select>      
-    </div>
+    
     
     <button type="submit" class="btn btn-default">Добавить</button>
     
+    
 </form>
 </div>
+<?php
+  if(isset($_POST['name']) && $_POST['name'] != '') {
+    $name = $_POST['name'];
+    $countryId = $_POST['country'];
+    addPlayer($db, $name, $countryId);
+  }
+   var_dump($_POST);
+?>
+
+</div>
+
 
 <footer>
 </footer>
