@@ -67,3 +67,11 @@ function addPlayer($db, $playerName, $countryId) {
         $stmt->bindValue(':country_id', $countryId, PDO::PARAM_INT);
         $stmt->execute();
 }
+function deletePlayer($db, $id) {
+    $sql = "DELETE FROM players WHERE player_id = :player_id";
+
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':player_id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    }
+    

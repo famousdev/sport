@@ -13,7 +13,6 @@
 
 </head>
 <body>
-<header>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Sport Transfer</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,66 +38,22 @@
    
   </div>
 </nav>
-</header>
+<header>
 <div class="container-fluid">
     <?php include 'db.php';?>
     <?php include 'api.php'; ?>
     <?php
-    $players = getAllPlayers($db);
+    $id = $_GET['player_id'];
+    if($id) {
+        $player = deletePlayer($db, $id);
+    } else {
+        echo "<h2> ERROR </h2>";
+        exit();
+    }
+    $player = getPlayerById($db, $id);
       ?> 
-      <table class="table table-bordered">
-        <tr>
-          <th>Игрок</th>
-          <th>Команда</th>
-          <th>Страна</th>
-          <th>Удалить</th>
-        </tr>
-          <?php 
-          foreach ($players as $player) {?>
-          <tr>
-          <td><a href="/sport/edit.php?player_id=<?php echo $player['player_id']; ?>"><?php echo $player['player_name'];?></a></td>
-          <td><?php echo $player['team_name'];?></td>
-          <td><?php echo $player['country_name'];?></td>
-          <td><a class="btn btn-danger" href="/sport/delete.php?player_id=<?php echo $player['player_id']; ?>">Удалить</a></td>
-          </tr>
-          <?php } ?>
-      </table>
-      <form action="" method="POST" role="form">
-    <legend for="">Добавить игрока</legend>
-    <div class="form-group">
-      <label for="">Введите имя </label>
-      <input type="text" class="form-control" id="name" name="name" placeholder="введите имя">
-    </div>
-    <div class="form-group">
-      <select name="country" id="country" class="form-control">
-            <?php 
-              $countries = getAllCountries($db);
-              foreach($countries as $key => $value) {
-                echo "<option value=".$value['country_id'].">".$value['country_name']."</option>";
-              }
-            ?>
-      </select>      
-    
-    
-    <button type="submit" class="btn btn-default">Добавить</button>
-    
-    
-</form>
 </div>
-<?php
-  if(isset($_POST['name']) && $_POST['name'] != '') {
-    $name = $_POST['name'];
-    $countryId = $_POST['country'];
-    addPlayer($db, $name, $countryId);
-  }
-?>
-
-</div>
-
-
-<footer>
-</footer>
-
+</header>
 
 </body>
 </html>
